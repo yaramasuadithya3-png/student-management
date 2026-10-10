@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CampusFlow | Student Management</title>
+<style>
+:root{--bg:#f5f7fc;--card:#fff;--ink:#17213b;--muted:#7b849c;--line:#e8ecf5;--purple:#6c63ff;--purple2:#8b7cff;--teal:#23b7a4;--orange:#ffad5a;--pink:#ff7b9c;--shadow:0 12px 35px rgba(39,48,91,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-columns:245px minmax(0,1fr);min-height:100vh}
+.sidebar{background:#fff;border-right:1px solid var(--line);padding:26px 17px;display:flex;flex-direction:column;gap:28px}.brand{display:flex;align-items:center;gap:11px;padding:0 9px;font-size:20px;font-weight:800;letter-spacing:-.5px}.brand-mark{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,var(--purple),#9a7dff);display:grid;place-items:center;color:white;font-size:20px;box-shadow:0 7px 16px #8175ff55}.brand span{color:var(--purple)}
+.nav-label{font-size:10px;letter-spacing:1.6px;font-weight:800;color:#a3a9bb;padding:0 12px;margin-bottom:9px}.nav{display:grid;gap:6px}.nav button{border:0;background:transparent;color:#7c849b;text-align:left;padding:12px 13px;border-radius:12px;display:flex;align-items:center;gap:13px;font-weight:650;transition:.2s}.nav button:hover,.nav button.active{background:#f0efff;color:var(--purple)}.nav .ico{width:21px;text-align:center;font-size:18px}.side-bottom{margin-top:auto;background:linear-gradient(145deg,#f0efff,#faf8ff);border:1px solid #e8e4ff;padding:17px;border-radius:18px}.side-bottom strong{display:block;font-size:14px;margin-bottom:5px}.side-bottom p{font-size:12px;color:var(--muted);margin:0 0 12px}.side-bottom button{border:0;background:var(--purple);color:#fff;border-radius:9px;padding:9px 12px;font-size:12px;font-weight:700}
+main{padding:28px 34px;min-width:0}.topbar{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:27px}.eyebrow{font-size:12px;color:var(--muted);font-weight:600}.topbar h1{font-size:27px;letter-spacing:-.9px;margin:2px 0 0}.top-actions{display:flex;align-items:center;gap:12px}.searchbox{position:relative}.searchbox input{width:220px;padding:11px 14px 11px 38px;border:1px solid var(--line);border-radius:12px;background:#fff;outline:none}.searchbox input:focus,.field input:focus,.field select:focus{border-color:var(--purple);box-shadow:0 0 0 3px #6c63ff19}.searchbox span{position:absolute;left:13px;top:8px;font-size:18px;color:var(--muted)}.icon-btn{border:1px solid var(--line);background:#fff;border-radius:12px;width:42px;height:42px;font-size:18px;position:relative}.dot{position:absolute;width:7px;height:7px;background:var(--pink);border:2px solid #fff;border-radius:50%;right:8px;top:7px}.profile{display:flex;align-items:center;gap:10px}.avatar{display:grid;place-items:center;width:40px;height:40px;border-radius:14px;background:#ffe8d7;color:#a85b2b;font-weight:800}.profile strong{display:block;font-size:13px}.profile small{color:var(--muted);font-size:11px}
+.welcome{position:relative;overflow:hidden;border-radius:23px;padding:27px 30px;color:white;background:linear-gradient(110deg,#635bfa 0%,#8573ff 55%,#ad8cff 100%);display:flex;justify-content:space-between;align-items:center;min-height:165px;box-shadow:0 15px 35px #7466fa30}.welcome:after,.welcome:before{content:"";position:absolute;border:1px solid #ffffff25;border-radius:50%;width:230px;height:230px;right:80px;top:-120px}.welcome:before{width:300px;height:300px;right:-30px;top:50px}.welcome-content{position:relative;z-index:1}.welcome .tag{font-size:11px;letter-spacing:1.2px;font-weight:800;color:#dedbff}.welcome h2{font-size:25px;line-height:1.2;letter-spacing:-.6px;margin:8px 0}.welcome p{margin:0;color:#e9e5ff;font-size:13px}.welcome button{position:relative;z-index:1;border:0;background:#fff;color:var(--purple);padding:12px 16px;border-radius:12px;font-weight:800;box-shadow:0 8px 18px #4b42c933}.welcome .sparkle{font-size:76px;opacity:.25;position:absolute;right:27%;top:28px;transform:rotate(12deg)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px;margin:22px 0}.stat{background:var(--card);border:1px solid #edf0f7;border-radius:18px;padding:19px 19px 16px;box-shadow:var(--shadow);min-width:0}.stat-head{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px;font-weight:700}.stat-icon{width:37px;height:37px;border-radius:12px;display:grid;place-items:center;font-size:18px}.lav{background:#efedff}.mint{background:#e2faf4}.peach{background:#fff0df}.rose{background:#ffe8ee}.stat h3{font-size:27px;letter-spacing:-.7px;margin:10px 0 1px}.stat-foot{font-size:11px;color:var(--muted)}.trend{color:#19a989;font-weight:800}
+.content-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(255px,1fr);gap:20px}.panel{background:#fff;border:1px solid #edf0f7;border-radius:19px;padding:21px;box-shadow:var(--shadow);min-width:0}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.panel h3{font-size:16px;margin:0;letter-spacing:-.25px}.panel-sub{color:var(--muted);font-size:12px;margin-top:4px}.text-btn{border:0;background:transparent;color:var(--purple);font-weight:800;font-size:12px;padding:6px}.chart-legend{display:flex;gap:16px;font-size:11px;color:var(--muted)}.legend-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px}.chart{height:185px;width:100%;display:block;overflow:visible}.chart-labels{display:flex;justify-content:space-between;font-size:10px;color:#a0a7b9;padding:0 7px;margin-top:2px}
+.attendance-list{display:grid;gap:16px}.att-row{display:grid;grid-template-columns:1fr auto;gap:8px}.att-title{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:8px}.att-title span:last-child{color:var(--muted);font-weight:600}.track{height:8px;background:#f0f2f8;border-radius:10px;overflow:hidden}.fill{height:100%;border-radius:10px}.att-note{margin-top:17px;background:#f8f7ff;border-radius:12px;padding:12px;font-size:11px;color:#7773a7;display:flex;gap:8px;align-items:flex-start}
+.students-panel{margin-top:21px}.table-tools{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.filter-select{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 10px;color:#68718a;font-size:12px;outline:none}.primary{background:var(--purple);color:#fff;border:0;border-radius:11px;padding:10px 14px;font-size:12px;font-weight:800;box-shadow:0 6px 13px #6c63ff28}.primary:hover{background:#584ff0;transform:translateY(-1px)}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;white-space:nowrap}th{text-align:left;font-size:10px;letter-spacing:.7px;color:#9aa2b6;font-weight:800;padding:13px 11px;border-bottom:1px solid var(--line)}td{padding:13px 11px;border-bottom:1px solid #f0f2f8;font-size:12px}tbody tr:hover{background:#fafaff}tbody tr:last-child td{border-bottom:0}.student{display:flex;align-items:center;gap:10px}.student-avatar{width:35px;height:35px;border-radius:12px;display:grid;place-items:center;font-size:11px;font-weight:800;background:#efedff;color:#6459db}.student strong{display:block;font-size:12px}.student small{color:var(--muted);font-size:10px}.pill{display:inline-flex;align-items:center;gap:5px;padding:5px 9px;border-radius:20px;font-size:10px;font-weight:800}.pill.active{background:#e4f9f1;color:#149576}.pill.inactive{background:#fff0df;color:#bd7824}.pill.present{background:#e4f9f1;color:#149576}.pill.absent{background:#ffe8ee;color:#d74e70}.row-actions{border:0;background:transparent;color:#8e95a8;font-size:19px;padding:2px 7px}.empty{text-align:center;color:var(--muted);padding:28px}.footer{display:flex;justify-content:space-between;gap:12px;color:#a1a7b7;font-size:11px;padding:19px 3px 5px}
+.modal-backdrop{position:fixed;inset:0;background:#18203b77;backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:18px;z-index:10}.modal-backdrop.show{display:flex}.modal{width:min(500px,100%);background:#fff;border-radius:22px;padding:25px;box-shadow:0 25px 80px #1b245344;animation:pop .2s ease}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.modal-head h2{margin:0;font-size:21px}.close{border:0;background:#f3f4fa;border-radius:10px;width:34px;height:34px;font-size:20px;color:#6f7890}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:800;color:#737c94}.field input,.field select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;outline:none;background:#fff}.modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:22px}.secondary{border:1px solid var(--line);background:#fff;border-radius:11px;padding:10px 14px;font-size:12px;font-weight:800;color:#737c94}
+.toast{position:fixed;bottom:22px;right:22px;background:#202744;color:#fff;padding:13px 17px;border-radius:12px;box-shadow:var(--shadow);font-size:13px;transform:translateY(90px);opacity:0;transition:.25s;z-index:20}.toast.show{transform:translateY(0);opacity:1}
+@keyframes pop{from{transform:translateY(8px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+@media(max-width:1100px){.app{grid-template-columns:205px minmax(0,1fr)}main{padding:23px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.content-grid{grid-template-columns:1fr}.chart{height:160px}}
+@media(max-width:720px){.app{display:block}.sidebar{padding:13px 15px;display:flex;flex-direction:row;align-items:center;gap:15px;border-right:0;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}.brand{padding:0;font-size:17px}.brand-mark{width:34px;height:34px}.sidebar .nav-label,.side-bottom{display:none}.nav{display:flex;overflow:auto;gap:4px}.nav button{padding:9px;font-size:0;gap:0}.nav .ico{font-size:18px}.sidebar>div:nth-child(2){margin-left:auto}.sidebar>div:nth-child(2) .nav{justify-content:flex-end}.sidebar .nav button{min-width:36px}.sidebar .nav button span:not(.ico){display:none}main{padding:19px 14px}.topbar{align-items:flex-start}.topbar h1{font-size:22px}.top-actions{gap:6px}.searchbox{display:none}.profile>div:last-child{display:none}.welcome{padding:22px;min-height:155px}.welcome h2{font-size:21px;max-width:240px}.welcome .sparkle{right:8%;font-size:60px}.welcome button{padding:10px;font-size:11px}.stats{gap:10px;margin:14px 0}.stat{padding:14px}.stat h3{font-size:24px}.stat-icon{width:31px;height:31px}.panel{padding:16px}.panel-head{align-items:flex-start}.students-panel .panel-head{flex-direction:column}.table-tools{width:100%}.filter-select{flex:1}.primary{white-space:nowrap}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.footer{font-size:10px}.chart-legend{gap:8px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">✦</div>Campus<span>Flow</span></div>
+    <div style="flex:1">
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="nav">
+        <button class="active" data-page="dashboard"><span class="ico">▦</span><span>Dashboard</span></button>
+        <button data-page="students"><span class="ico">♙</span><span>Students</span></button>
+        <button data-page="attendance"><span class="ico">☑</span><span>Attendance</span></button>
+        <button data-page="reports"><span class="ico">▤</span><span>Reports</span></button>
+      </nav>
+    </div>
+    <div>
+      <div class="nav-label">PREFERENCES</div>
+      <nav class="nav"><button id="helpBtn"><span class="ico">ⓘ</span><span>Help & tips</span></button></nav>
+    </div>
+    <div class="side-bottom"><strong>Make every day count ✨</strong><p>Small steps today, big achievements tomorrow.</p><button id="quickAdd">＋ Add student</button></div>
+  </aside>
+  <main>
+    <header class="topbar">
+      <div><div class="eyebrow" id="todayLabel">YOUR CAMPUS AT A GLANCE</div><h1 id="pageTitle">Dashboard overview</h1></div>
+      <div class="top-actions">
+        <div class="searchbox"><span>⌕</span><input id="globalSearch" placeholder="Search students..." aria-label="Search students"></div>
+        <button class="icon-btn" id="notifyBtn" aria-label="Notifications">♧<i class="dot"></i></button>
+        <div class="profile"><div class="avatar">AD</div><div><strong>Admin Desk</strong><small>Administrator</small></div></div>
+      </div>
+    </header>
+    <section class="welcome">
+      <div class="welcome-content"><div class="tag">✦ YOUR CAMPUS, SIMPLIFIED</div><h2>Great things start with<br>great students.</h2><p>Keep your student community organized and thriving.</p></div>
+      <div class="sparkle">✧</div><button id="welcomeAdd">＋ Add a student</button>
+    </section>
+    <section class="stats">
+      <article class="stat"><div class="stat-head">Total students <span class="stat-icon lav">♙</span></div><h3 id="totalCount">128</h3><div class="stat-foot"><span class="trend">↗ Live count</span> · registered learners</div></article>
+      <article class="stat"><div class="stat-head">Present today <span class="stat-icon mint">✓</span></div><h3 id="presentCount">112</h3><div class="stat-foot"><span class="trend" id="attendanceRate">87.5%</span> · attendance rate</div></article>
+      <article class="stat"><div class="stat-head">Active classes <span class="stat-icon peach">▤</span></div><h3 id="classCount">6</h3><div class="stat-foot">Across all departments</div></article>
+      <article class="stat"><div class="stat-head">Average score <span class="stat-icon rose">★</span></div><h3 id="averageScore">84%</h3><div class="stat-foot"><span class="trend">Strong progress</span> · current term</div></article>
+    </section>
+    <section class="content-grid">
+      <article class="panel">
+        <div class="panel-head"><div><h3>Student activity</h3><div class="panel-sub">A snapshot of class performance</div></div><div class="chart-legend"><span><i class="legend-dot" style="background:#7165ff"></i>Attendance</span><span><i class="legend-dot" style="background:#2cc5ad"></i>Performance</span></div></div>
+        <svg class="chart" viewBox="0 0 620 190" preserveAspectRatio="none" role="img" aria-label="Student attendance and performance chart">
+          <defs><linearGradient id="area1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7165ff" stop-opacity=".2"/><stop offset="100%" stop-color="#7165ff" stop-opacity="0"/></linearGradient></defs>
+          <g stroke="#edf0f7" stroke-width="1"><line x1="35" y1="25" x2="610" y2="25"/><line x1="35" y1="65" x2="610" y2="65"/><line x1="35" y1="105" x2="610" y2="105"/><line x1="35" y1="145" x2="610" y2="145"/></g>
+          <g fill="#a1a8ba" font-size="10"><text x="2" y="28">100</text><text x="8" y="68">75</text><text x="8" y="108">50</text><text x="8" y="148">25</text></g>
+          <path d="M35 60 C65 52 78 70 115 55 S165 40 195 58 S245 76 275 48 S330 36 355 50 S405 63 435 38 S490 54 515 35 S575 42 610 27 L610 160 L35 160Z" fill="url(#area1)"/>
+          <path d="M35 60 C65 52 78 70 115 55 S165 40 195 58 S245 76 275 48 S330 36 355 50 S405 63 435 38 S490 54 515 35 S575 42 610 27" fill="none" stroke="#7165ff" stroke-width="3" stroke-linecap="round"/>
+          <path d="M35 93 C65 82 82 100 115 87 S165 78 195 91 S245 95 275 82 S330 76 355 85 S405 90 435 74 S490 82 515 69 S575 74 610 63" fill="none" stroke="#2cc5ad" stroke-width="3" stroke-linecap="round" stroke-dasharray="5 5"/>
+          <g fill="#7165ff"><circle cx="115" cy="55" r="3.5"/><circle cx="275" cy="48" r="3.5"/><circle cx="435" cy="38" r="3.5"/><circle cx="610" cy="27" r="3.5"/></g>
+        </svg>
+        <div class="chart-labels"><span>Week 1</span><span>Week 2</span><span>Week 3</span><span>Week 4</span><span>This week</span></div>
+      </article>
+      <article class="panel">
+        <div class="panel-head"><div><h3>Attendance overview</h3><div class="panel-sub">Today's class participation</div></div><span style="font-size:22px">◷</span></div>
+        <div class="attendance-list" id="attendanceOverview"></div>
+        <div class="att-note"><span>💡</span><span><strong>Tip:</strong> Consistent attendance helps students build great learning habits.</span></div>
+      </article>
+    </section>
+    <section class="panel students-panel" id="studentSection">
+      <div class="panel-head"><div><h3 id="tableTitle">Recently added students</h3><div class="panel-sub">Manage profiles, courses and daily attendance</div></div><div class="table-tools"><select class="filter-select" id="classFilter" aria-label="Filter by class"><option value="">All classes</option></select><select class="filter-select" id="statusFilter" aria-label="Filter by attendance"><option value="">All attendance</option><option value="Present">Present</option><option value="Absent">Absent</option></select><button class="primary" id="addBtn">＋ Add student</button></div></div>
+      <div class="table-wrap"><table><thead><tr><th>STUDENT</th><th>CLASS</th><th>EMAIL</th><th>ATTENDANCE</th><th>STATUS</th><th></th></tr></thead><tbody id="studentRows"></tbody></table><div class="empty" id="emptyState" hidden>No students match your search. Try another filter or add a student.</div></div>
+      <div class="footer"><span id="resultCount">Showing students</span><span>CampusFlow · Student success, organized.</span></div>
+    </section>
+  </main>
+</div>
+<div class="modal-backdrop" id="modalBackdrop">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head"><h2 id="modalTitle">Add a student</h2><button class="close" id="closeModal" aria-label="Close">×</button></div>
+    <form id="studentForm"><div class="form-grid">
+      <div class="field full"><label for="studentName">FULL NAME *</label><input id="studentName" required maxlength="70" placeholder="e.g. Aanya Sharma"></div>
+      <div class="field"><label for="studentEmail">EMAIL *</label><input id="studentEmail" type="email" required placeholder="student@example.com"></div>
+      <div class="field"><label for="studentClass">CLASS / DEPARTMENT *</label><select id="studentClass" required><option value="">Choose class</option><option>Computer Science</option><option>Mathematics</option><option>Physics</option><option>Commerce</option><option>Biology</option><option>Engineering</option></select></div>
+      <div class="field"><label for="studentStatus">ATTENDANCE TODAY</label><select id="studentStatus"><option>Present</option><option>Absent</option></select></div>
+      <div class="field"><label for="studentScore">SCORE (%)</label><input id="studentScore" type="number" min="0" max="100" value="85"></div>
+    </div><div class="modal-actions"><button type="button" class="secondary" id="cancelModal">Cancel</button><button class="primary" type="submit">Save student</button></div></form>
+  </section>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const seedStudents = [
+ {id:1,name:"Aarav Mehta",email:"aarav.mehta@campus.edu",cls:"Computer Science",status:"Present",score:91},
+ {id:2,name:"Diya Reddy",email:"diya.reddy@campus.edu",cls:"Mathematics",status:"Present",score:88},
+ {id:3,name:"Ishaan Patel",email:"ishaan.patel@campus.edu",cls:"Engineering",status:"Absent",score:76},
+ {id:4,name:"Ananya Sharma",email:"ananya.sharma@campus.edu",cls:"Physics",status:"Present",score:94},
+ {id:5,name:"Kabir Nair",email:"kabir.nair@campus.edu",cls:"Commerce",status:"Present",score:82},
+ {id:6,name:"Meera Iyer",email:"meera.iyer@campus.edu",cls:"Biology",status:"Present",score:89},
+ {id:7,name:"Vihaan Rao",email:"vihaan.rao@campus.edu",cls:"Computer Science",status:"Absent",score:73},
+ {id:8,name:"Saanvi Gupta",email:"saanvi.gupta@campus.edu",cls:"Engineering",status:"Present",score:86}
+];
+let students = loadStudents();
+let nextId = Math.max(0,...students.map(s=>s.id))+1;
+let currentPage = "dashboard";
+const $ = id => document.getElementById(id);
+function loadStudents(){try{const saved=localStorage.getItem("campusflow_students");return saved?JSON.parse(saved):seedStudents.map(s=>({...s}));}catch(e){return seedStudents.map(s=>({...s}));}}
+function save(){try{localStorage.setItem("campusflow_students",JSON.stringify(students));}catch(e){}}
+function initials(name){return name.trim().split(/\s+/).slice(0,2).map(p=>p[0]).join("").toUpperCase();}
+function escapeHTML(str){return String(str).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function toast(message){$("toast").textContent=message;$("toast").classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>$("toast").classList.remove("show"),2600);}
+function updateStats(){
+ const total=students.length,present=students.filter(s=>s.status==="Present").length,avg=total?Math.round(students.reduce((a,s)=>a+Number(s.score||0),0)/total):0;
+ $("totalCount").textContent=total;$("presentCount").textContent=present;$("attendanceRate").textContent=(total?(present/total*100):0).toFixed(1)+"%";$("averageScore").textContent=avg+"%";
+ $("classCount").textContent=new Set(students.map(s=>s.cls)).size;
+ const classes=[...new Set(students.map(s=>s.cls))].sort();const filter=$("classFilter"),old=filter.value;
+ filter.innerHTML='<option value="">All classes</option>'+classes.map(c=>`<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join("");filter.value=classes.includes(old)?old:"";
+ const groups=classes.map(c=>{const group=students.filter(s=>s.cls===c);return {name:c,total:group.length,present:group.filter(s=>s.status==="Present").length};}).sort((a,b)=>b.total-a.total).slice(0,4);
+ const colors=["#7165ff","#2cc5ad","#ffad5a","#ff7b9c"];
+ $("attendanceOverview").innerHTML=groups.length?groups.map((g,i)=>{const pct=g.total?Math.round(g.present/g.total*100):0;return `<div><div class="att-title"><span>${escapeHTML(g.name)}</span><span>${pct}% · ${g.present}/${g.total}</span></div><div class="track"><div class="fill" style="width:${pct}%;background:${colors[i]}"></div></div></div>`;}).join(""):'<div class="empty">Add students to see attendance.</div>';
+}
+function renderStudents(){
+ const query=$("globalSearch").value.trim().toLowerCase(),cls=$("classFilter").value,status=$("statusFilter").value;
+ const filtered=students.filter(s=>(!query||s.name.toLowerCase().includes(query)||s.email.toLowerCase().includes(query)||s.cls.toLowerCase().includes(query))&&(!cls||s.cls===cls)&&(!status||s.status===status));
+ const rows=$("studentRows");
+ rows.innerHTML=filtered.map((s,i)=>`<tr><td><div class="student"><div class="student-avatar" style="background:${["#efedff","#e2faf4","#fff0df","#ffe8ee"][i%4]};color:${["#6459db","#15967f","#b77427","#ce5373"][i%4]}">${escapeHTML(initials(s.name))}</div><div><strong>${escapeHTML(s.name)}</strong><small>ID: STU-${String(s.id).padStart(4,"0")}</small></div></div></td><td>${escapeHTML(s.cls)}</td><td>${escapeHTML(s.email)}</td><td><span class="pill ${s.status.toLowerCase()}">${s.status==="Present"?"●":"●"} ${s.status}</span></td><td><span class="pill active">Active</span></td><td><button class="row-actions" data-action="attendance" data-id="${s.id}" title="Toggle attendance" aria-label="Toggle attendance">↻</button><button class="row-actions" data-action="delete" data-id="${s.id}" title="Delete student" aria-label="Delete student">⋯</button></td></tr>`).join("");
+ $("emptyState").hidden=filtered.length>0;$("resultCount").textContent=`Showing ${filtered.length} of ${students.length} students`;
+ $("tableTitle").textContent=currentPage==="attendance"?"Daily attendance":currentPage==="reports"?"Student report list":currentPage==="students"?"All students":"Recently added students";
+}
+function render(){updateStats();renderStudents();}
+function openModal(){$("studentForm").reset();$("studentScore").value=85;$("modalBackdrop").classList.add("show");setTimeout(()=>$("studentName").focus(),60);}
+function closeModal(){$("modalBackdrop").classList.remove("show");}
+["addBtn","quickAdd","welcomeAdd"].forEach(id=>$(id).addEventListener("click",openModal));
+$("closeModal").addEventListener("click",closeModal);$("cancelModal").addEventListener("click",closeModal);
+$("modalBackdrop").addEventListener("click",e=>{if(e.target===$("modalBackdrop"))closeModal();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+$("studentForm").addEventListener("submit",e=>{
+ e.preventDefault();const name=$("studentName").value.trim(),email=$("studentEmail").value.trim(),cls=$("studentClass").value,score=Number($("studentScore").value);
+ if(!name||!email||!cls){toast("Please complete all required fields.");return;}
+ if(students.some(s=>s.email.toLowerCase()===email.toLowerCase())){toast("A student with this email already exists.");return;}
+ if(score<0||score>100||!Number.isFinite(score)){toast("Score must be between 0 and 100.");return;}
+ students.unshift({id:nextId++,name,email,cls,status:$("studentStatus").value,score});save();render();closeModal();toast(name+" added successfully!");
+});
+$("studentRows").addEventListener("click",e=>{
+ const btn=e.target.closest("button[data-action]");if(!btn)return;const id=Number(btn.dataset.id),student=students.find(s=>s.id===id);if(!student)return;
+ if(btn.dataset.action==="attendance"){student.status=student.status==="Present"?"Absent":"Present";save();render();toast(`${student.name}: marked ${student.status.toLowerCase()}.`);}
+ else if(btn.dataset.action==="delete"){if(confirm(`Remove ${student.name} from the student list?`)){students=students.filter(s=>s.id!==id);save();render();toast("Student removed.");}}
+});
+$("globalSearch").addEventListener("input",renderStudents);$("classFilter").addEventListener("change",renderStudents);$("statusFilter").addEventListener("change",renderStudents);
+document.querySelectorAll(".nav button[data-page]").forEach(btn=>btn.addEventListener("click",()=>{
+ currentPage=btn.dataset.page;document.querySelectorAll(".nav button[data-page]").forEach(b=>b.classList.toggle("active",b===btn));
+ const titles={dashboard:"Dashboard overview",students:"Student directory",attendance:"Attendance center",reports:"Student reports"};
+ $("pageTitle").textContent=titles[currentPage];renderStudents();
+ if(currentPage==="students"){$("studentSection").scrollIntoView({behavior:"smooth",block:"start"});}
+ else if(currentPage==="attendance"){$("statusFilter").focus();$("studentSection").scrollIntoView({behavior:"smooth",block:"start"});}
+ else if(currentPage==="reports"){toast("Report view ready — use search and filters to narrow results.");$("studentSection").scrollIntoView({behavior:"smooth",block:"start"});}
+ else window.scrollTo({top:0,behavior:"smooth"});
+}));
+$("notifyBtn").addEventListener("click",()=>toast("You're all caught up! No new notifications."));
+$("helpBtn").addEventListener("click",()=>alert("Quick tips:\n\n• Use “Add student” to create a profile.\n• Search by name, email or class.\n• Use the filters to narrow the list.\n• Click ↻ beside a student to toggle attendance.\n• Your changes are saved in this browser."));
+const now=new Date();$("todayLabel").textContent=now.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"}).toUpperCase()+" · YOUR CAMPUS AT A GLANCE";
+render();
+</script>
+</body>
+</html>
